@@ -1,21 +1,30 @@
 /**
- * Name: EMIC3
- * Author: Nick Lamprianidis (lampnick67@yahoo.com) / Shamyl (shamylmansoor@gmail.com)
+ * Name: EMIC2_UART
+ * Author: Shamyl Bin Mansoor (shamylmansoor@gmail.com)
  * Version: 1.0
- * Description: A library for interfacing the EMIC3 Text-to-Speech module
- * License: Copyright (c) 2013 Nick Lamprianidis 
+ * Desctiption: A clone of the original library modified to work with harware
+ * Serial Port 1 of Atmega2560
+ * License: Copyright (c) 2013 Nick Lamprianidis
+ *          This library is licensed under the MIT license
+ *          http://www.opensource.org/licenses/mit-license.php
+ * Source: https://github.com/shamyl/EMIC2_UART
+ * Original Author and contributor ******************************
+ * Original Author: Nick Lamprianidis (lampnick67@yahoo.com)
+ * Version: 1.0
+ * Description: A library for interfacing the EMIC2 Text-to-Speech module
+ * License: Copyright (c) 2013 Nick Lamprianidis
  *          This library is licensed under the MIT license
  *          http://www.opensource.org/licenses/mit-license.php
  * Source: https://github.com/pAIgn10/EMIC2
  *
- * Filename: EMIC3.cpp
+ * Filename: EMIC2_UART.cpp
  * File description: Implementation of methods for the EMIC2 library
  */
 
-#include <EMIC3.h>
+#include <EMIC2_UART.h>
 
-// Creates an instance of the EMIC3 class and initializes variables
-EMIC3::EMIC3()
+// Creates an instance of the EMIC2_UART class and initializes variables
+EMIC2_UART::EMIC2_UART()
 {
     _paused = 0;
     _voice = 0;
@@ -28,18 +37,18 @@ EMIC3::EMIC3()
 
 // Upon destruction of an instance,
 // it frees dynamically allocated data members
-EMIC3::~EMIC3()
+EMIC2_UART::~EMIC2_UART()
 {
     //delete _emic2_io;
 }
 
 // Initializes serial port and checks for availability of the Emic 2 module
-void EMIC3::begin()
+void EMIC2_UART::begin()
 {
     //_emic2_io = new SoftwareSerial(rx_pin, tx_pin);
     //_emic2_io->begin(9600);
     Serial1.begin(9600);
-    
+
     #ifdef VERBOSE
     Serial.println("Serial Port is set");
     #endif
@@ -48,7 +57,7 @@ void EMIC3::begin()
     // It then sends a ":" character to indicate it's ready to accept commands
     // If the Emic 2 is already initialized, a CR will also causes it to send a ":"
     Serial1.print('\n');  // Sends a CR in case the system is already up
-    while ( Serial1.read() != ':' ) ;  // When the Emic 2 has initialized and is ready, 
+    while ( Serial1.read() != ':' ) ;  // When the Emic 2 has initialized and is ready,
                                           // it will send a single ':' character...
                                           // so it waits here until it receives the ':'
     delay(10);  // Short delay
@@ -57,11 +66,11 @@ void EMIC3::begin()
     #ifdef VERBOSE
     Serial.println("Emic 2 Module is ready");
     #endif
-     
+
 }
 
 // Initializes serial port and SD card, and checks for availability of the Emic 2 module
-void EMIC3::begin(uint8_t cs_pin)
+void EMIC2_UART::begin(uint8_t cs_pin)
 {
     begin(); // Initializes serial port
 
@@ -81,7 +90,7 @@ void EMIC3::begin(uint8_t cs_pin)
 }
 
 // Waits (Blocking) until Emic 2 is ready to receive a command
-void EMIC3::ready()
+void EMIC2_UART::ready()
 {
     //_emic2_io->listen();
     Serial1.flush();  // Flushes receive buffer
@@ -90,7 +99,7 @@ void EMIC3::ready()
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(char *msg)
+void EMIC2_UART::speak(char *msg)
 {
     ready();
 
@@ -106,7 +115,7 @@ void EMIC3::speak(char *msg)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(String msg)
+void EMIC2_UART::speak(String msg)
 {
     ready();
 
@@ -122,7 +131,7 @@ void EMIC3::speak(String msg)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(char num)
+void EMIC2_UART::speak(char num)
 {
     ready();
 
@@ -138,7 +147,7 @@ void EMIC3::speak(char num)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(unsigned char num)
+void EMIC2_UART::speak(unsigned char num)
 {
     ready();
 
@@ -154,7 +163,7 @@ void EMIC3::speak(unsigned char num)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(int num)
+void EMIC2_UART::speak(int num)
 {
     ready();
 
@@ -170,7 +179,7 @@ void EMIC3::speak(int num)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(unsigned int num)
+void EMIC2_UART::speak(unsigned int num)
 {
     ready();
 
@@ -186,7 +195,7 @@ void EMIC3::speak(unsigned int num)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(long num)
+void EMIC2_UART::speak(long num)
 {
     ready();
 
@@ -202,7 +211,7 @@ void EMIC3::speak(long num)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(unsigned long num)
+void EMIC2_UART::speak(unsigned long num)
 {
     ready();
 
@@ -218,7 +227,7 @@ void EMIC3::speak(unsigned long num)
 }
 
 // Sends a message to the Emic 2 module to speak
-void EMIC3::speak(double num)
+void EMIC2_UART::speak(double num)
 {
     ready();
 
@@ -236,7 +245,7 @@ void EMIC3::speak(double num)
 // Sends a message to the Emic 2 module to speak
 // The message originates from an SD card
 // There can be at most 1023 characters per line in a file
-void EMIC3::speak(char *filename, uint8_t sd)
+void EMIC2_UART::speak(char *filename, uint8_t sd)
 {
     if ( _sd )  // Checks if the SD card has been initiliazed
     {
@@ -309,7 +318,7 @@ void EMIC3::speak(char *filename, uint8_t sd)
 // Sends a message to the Emic 2 module to speak
 // The message originates from an SD card
 // There can be at most 1023 characters per line in a file
-void EMIC3::speak(String filename, uint8_t sd)
+void EMIC2_UART::speak(String filename, uint8_t sd)
 {
     char buf[13];
     filename.toCharArray(buf, 13);
@@ -317,7 +326,7 @@ void EMIC3::speak(String filename, uint8_t sd)
 }
 
 // Plays demonstration messages
-void EMIC3::speakDemo(uint8_t num)
+void EMIC2_UART::speakDemo(uint8_t num)
 {
     if ( num >= 0 && num < 3 )
     {
@@ -336,7 +345,7 @@ void EMIC3::speakDemo(uint8_t num)
 }
 
 // Sends a command specified entirely on the input argument
-void EMIC3::sendCmd(char *cmd)
+void EMIC2_UART::sendCmd(char *cmd)
 {
     ready();
 
@@ -349,7 +358,7 @@ void EMIC3::sendCmd(char *cmd)
 }
 
 // Pauses/Unpauses playback
-EMIC3& EMIC3::operator~()
+EMIC2_UART& EMIC2_UART::operator~()
 {
     //_emic2_io->listen();
     // Sends pause/unpause command
@@ -363,12 +372,12 @@ EMIC3& EMIC3::operator~()
     if ( _paused ) Serial.println("Playback unpaused");
     else Serial.println("Playback paused");
     #endif
-    
+
     return *this;
 }
 
 // Stops playback
-EMIC3& EMIC3::operator!()
+EMIC2_UART& EMIC2_UART::operator!()
 {
     //_emic2_io->listen();
     // Sends stop command
@@ -378,12 +387,12 @@ EMIC3& EMIC3::operator!()
     #ifdef VERBOSE
     Serial.println("Playback stopped");
     #endif
-    
+
     return *this;
 }
 
 // Raises volume by 1dB
-EMIC3& EMIC3::operator++()
+EMIC2_UART& EMIC2_UART::operator++()
 {
     setVolume(_volume + 1);
 
@@ -395,7 +404,7 @@ EMIC3& EMIC3::operator++()
 }
 
 // Lowers volume by 1dB
-EMIC3& EMIC3::operator--()
+EMIC2_UART& EMIC2_UART::operator--()
 {
     setVolume(_volume - 1);
 
@@ -407,7 +416,7 @@ EMIC3& EMIC3::operator--()
 }
 
 // Raises volume by the specified dB
-EMIC3& EMIC3::operator+=(uint8_t adjust_volume)
+EMIC2_UART& EMIC2_UART::operator+=(uint8_t adjust_volume)
 {
     setVolume(_volume + adjust_volume);
 
@@ -419,7 +428,7 @@ EMIC3& EMIC3::operator+=(uint8_t adjust_volume)
 }
 
 // Lowers volume by the specified dB
-EMIC3& EMIC3::operator-=(uint8_t adjust_volume)
+EMIC2_UART& EMIC2_UART::operator-=(uint8_t adjust_volume)
 {
     setVolume(_volume - adjust_volume);
 
@@ -431,7 +440,7 @@ EMIC3& EMIC3::operator-=(uint8_t adjust_volume)
 }
 
 // Increases speaking rate
-EMIC3& EMIC3::operator>>(uint16_t adjust_rate)
+EMIC2_UART& EMIC2_UART::operator>>(uint16_t adjust_rate)
 {
     setRate(_rate + adjust_rate);
 
@@ -443,7 +452,7 @@ EMIC3& EMIC3::operator>>(uint16_t adjust_rate)
 }
 
 // Decreases speaking rate
-EMIC3& EMIC3::operator<<(uint16_t adjust_rate)
+EMIC2_UART& EMIC2_UART::operator<<(uint16_t adjust_rate)
 {
     // Ensures that the result rate won't be negative...
     // ! Input argument to setRate is unsigned
@@ -460,7 +469,7 @@ EMIC3& EMIC3::operator<<(uint16_t adjust_rate)
 }
 
 // Sets voice
-void EMIC3::setVoice(uint8_t voice)
+void EMIC2_UART::setVoice(uint8_t voice)
 {
     if ( voice >= 0 && voice < 9 )
     {
@@ -482,13 +491,13 @@ void EMIC3::setVoice(uint8_t voice)
 }
 
 // Returns the current setting of the voice level (in dB)
-uint8_t EMIC3::getVoice()
+uint8_t EMIC2_UART::getVoice()
 {
     return _voice;
 }
 
 // Sets volume level (in dB)
-void EMIC3::setVolume(int8_t volume)
+void EMIC2_UART::setVolume(int8_t volume)
 {
     ready();
 
@@ -510,7 +519,7 @@ void EMIC3::setVolume(int8_t volume)
 }
 
 // Resets volume level (0dB)
-void EMIC3::resetVolume()
+void EMIC2_UART::resetVolume()
 {
     setVolume(0);
 
@@ -520,13 +529,13 @@ void EMIC3::resetVolume()
 }
 
 // Returns the current setting of the volume
-int8_t EMIC3::getVolume()
+int8_t EMIC2_UART::getVolume()
 {
     return _volume;
 }
 
 // Sets speaking rate (in words/minute)
-void EMIC3::setRate(uint16_t rate)
+void EMIC2_UART::setRate(uint16_t rate)
 {
     ready();
 
@@ -548,7 +557,7 @@ void EMIC3::setRate(uint16_t rate)
 }
 
 // Resets speaking rate (200words/minute)
-void EMIC3::resetRate()
+void EMIC2_UART::resetRate()
 {
     setRate(200);
 
@@ -558,13 +567,13 @@ void EMIC3::resetRate()
 }
 
 // Returns the current setting of the speaking rate (in words/minute)
-uint16_t EMIC3::getRate()
+uint16_t EMIC2_UART::getRate()
 {
     return _rate;
 }
 
 // Sets speaking language
-void EMIC3::setLanguage(uint8_t language)
+void EMIC2_UART::setLanguage(uint8_t language)
 {
     if ( language == 0 || language == 1 || language == 2 )
     {
@@ -586,13 +595,13 @@ void EMIC3::setLanguage(uint8_t language)
 }
 
 // Returns the current setting of the language
-uint8_t EMIC3::getLanguage()
+uint8_t EMIC2_UART::getLanguage()
 {
     return _language;
 }
 
 // Sets the parser
-void EMIC3::setParser(uint8_t parser)
+void EMIC2_UART::setParser(uint8_t parser)
 {
     if ( parser == 0 || parser == 1 )
     {
@@ -614,13 +623,13 @@ void EMIC3::setParser(uint8_t parser)
 }
 
 // Returns the current setting of the parser
-uint8_t EMIC3::getParser()
+uint8_t EMIC2_UART::getParser()
 {
     return _parser;
 }
 
 // Updates an instance to the default settings
-void EMIC3::setDefaultSettings()
+void EMIC2_UART::setDefaultSettings()
 {
     ready();
 
@@ -644,7 +653,7 @@ void EMIC3::setDefaultSettings()
 // Prints to the serial port the current settings of the Emic 2 Module
 // The response is bigger than the size of the receive buffer...
 // so it prints the response while it receives the data to make room for them
-void EMIC3::getCurrentSettings()
+void EMIC2_UART::getCurrentSettings()
 {
     ready();
 
@@ -660,7 +669,7 @@ void EMIC3::getCurrentSettings()
 // The response is bigger than the size of the receive buffer...
 // so it prints the response while it receives the data to make room for them
 // The process is not fast enough. The end of the response printed will be gibberish
-void EMIC3::getVInfo()
+void EMIC2_UART::getVInfo()
 {
     ready();
 

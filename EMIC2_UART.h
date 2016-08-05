@@ -1,19 +1,28 @@
 /**
- * Name: EMIC3
- * Author: Nick Lamprianidis (lampnick67@yahoo.com) / Shamyl (shamylmansoor@gmail.com)
+ * Name: EMIC2_UART
+ * Author: Shamyl Bin Mansoor (shamylmansoor@gmail.com)
+ * Version: 1.0
+ * Desctiption: A clone of the original library modified to work with harware
+ * Serial Port 1 of Atmega2560
+ * License: Copyright (c) 2013 Nick Lamprianidis
+ *          This library is licensed under the MIT license
+ *          http://www.opensource.org/licenses/mit-license.php
+ * Source: https://github.com/shamyl/EMIC2_UART
+ * Original Author and contributor ******************************
+ * Author: Nick Lamprianidis (lampnick67@yahoo.com)
  * Version: 1.0 / Version: 1.0
  * Description: A library for interfacing the EMIC2 Text-to-Speech module
- * License: Copyright (c) 2013 Nick Lamprianidis 
+ * License: Copyright (c) 2013 Nick Lamprianidis
  *          This library is licensed under the MIT license
  *          http://www.opensource.org/licenses/mit-license.php
  * Source: https://github.com/pAIgn10/EMIC2
  *
- * Filename: EMIC3.h
+ * Filename: EMIC2_UART.h
  * File description: Definitions and methods for the EMIC2 library
  */
 
-#ifndef EMIC3_h
-#define EMIC3_h
+#ifndef EMIC2_UART_h
+#define EMIC2_UART_h
 
 #include <Arduino.h>
 //#include <SoftwareSerial.h>
@@ -25,11 +34,11 @@
 #define SD_C 1
 
 // A class for interfacing the Emic 2 module
-class EMIC3
+class EMIC2_UART
 {
 public:
-	EMIC3();
-	~EMIC3();
+	EMIC2_UART();
+	~EMIC2_UART();
 	void begin();
 	void begin( uint8_t cs_pin);
 	void speak(char *msg);
@@ -46,14 +55,14 @@ public:
 	void speakDemo(uint8_t num);
 	void sendCmd(char *cmd);
 	void ready();
-	EMIC3& operator~();
-	EMIC3& operator!();
-	EMIC3& operator++();
-	EMIC3& operator--();
-	EMIC3& operator+=(uint8_t adjust_volume);
-	EMIC3& operator-=(uint8_t adjust_volume);
-	EMIC3& operator>>(uint16_t adjust_rate);
-	EMIC3& operator<<(uint16_t adjust_rate);
+	EMIC2_UART& operator~();
+	EMIC2_UART& operator!();
+	EMIC2_UART& operator++();
+	EMIC2_UART& operator--();
+	EMIC2_UART& operator+=(uint8_t adjust_volume);
+	EMIC2_UART& operator-=(uint8_t adjust_volume);
+	EMIC2_UART& operator>>(uint16_t adjust_rate);
+	EMIC2_UART& operator<<(uint16_t adjust_rate);
 	void setVoice(uint8_t voice);
 	uint8_t getVoice();
 	void setVolume(int8_t volume);
@@ -85,4 +94,4 @@ private:
 	uint8_t _sd;
 };
 
-#endif  // EMIC3
+#endif  // EMIC2_UART
