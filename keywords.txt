@@ -1,12 +1,12 @@
 ######################################
-# Syntax Coloring Map For EMIC3      #
+# Syntax Coloring Map For EMIC2_UART      #
 ######################################
 
 ######################################
 # Datatypes (KEYWORD1)               #
 ######################################
 
-EMIC3	KEYWORD1
+EMIC2_UART	KEYWORD1
 
 ######################################
 # Methods and Functions (KEYWORD2)   #

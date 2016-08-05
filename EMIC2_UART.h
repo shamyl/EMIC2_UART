@@ -1,7 +1,7 @@
 /**
  * Name: EMIC2_UART
  * Author: Shamyl Bin Mansoor (shamylmansoor@gmail.com)
- * Version: 1.0
+ * Version: 1.0  updated Aug 2016
  * Desctiption: A clone of the original library modified to work with harware
  * Serial Port 1 of Atmega2560
  * License: Copyright (c) 2013 Nick Lamprianidis

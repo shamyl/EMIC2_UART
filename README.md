@@ -1,3 +1,9 @@
+EMIC2_UART
+-----------
+-----------
+EMIC2_UART is a complete clone of EMIC2 library but updated to work with hardware serial port instead of the SoftwareSerial library. This resolves the issue of using multiple serial modules together with EMIC2_UART.
+One main change is now there is no need to define the RX and TX pins and to initialize the library we call begin() instead of begin(uint8_t rx_pin, uint8_t tx_pin). The examples have been updated to work with EMIC2_UART.
+
 EMIC2
 =====
 
